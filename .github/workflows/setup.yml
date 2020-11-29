@@ -1,17 +1,23 @@
+  
 name: Test Setup
 
-on:
+on: 
   push:
-    branches: [master]
-   
+    branches: [main]
+  schedule:
+    - cron: "* * * * *"
+
 jobs:
   my-job:
-    name: Setup ubuntu
+    name: My Job
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: '1.13.7' # The Go version to download (if necessary) and use.
-    - run: go version
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Go env
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.15.4'
+      - name: Check Go version
+        run: go version
+          
